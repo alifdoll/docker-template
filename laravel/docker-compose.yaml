@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  service_name:
+    container_name: container_name
+    build: .
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 9090:80
+    networks:
+      - mysql_network
+
+# This networks is based on the network defined in mysql_and_phpmyadmin
+# Make sure you already have the image and container for db
+networks:
+  mysql_network:
+    external: true
