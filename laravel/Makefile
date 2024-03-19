@@ -1,6 +1,10 @@
-CONTAINER_NAME=laravel_tool
+CONTAINER_NAME=sellerpro_toolbox_v2
 
 setup:
+	@if [ -z "$(CONTAINER_NAME)" ]; then \
+			echo "CONTAINER_NAME is empty."; \
+			exit 1; \
+		fi
 	echo "Make Sure .env file exists"
 	@make build
 	@make up
