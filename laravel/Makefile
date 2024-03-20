@@ -1,4 +1,4 @@
-CONTAINER_NAME=sellerpro_toolbox_v2
+CONTAINER_NAME=
 
 setup:
 	@if [ -z "$(CONTAINER_NAME)" ]; then \
