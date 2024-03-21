@@ -21,8 +21,8 @@ up:
 stop:
 	docker-compose stop
 
-docker-exec:
-	docker exec $(CONTAINER_NAME) bash
+exec:
+	docker exec  -it$(CONTAINER_NAME) bash
 
 give-permission:
 	docker exec $(CONTAINER_NAME) bash -c "chmod -R ugo+rw /var/www/html/ || chmod 775 -R /var/www/html/"
@@ -30,3 +30,15 @@ give-permission:
 
 composer-install:
 	docker exec $(CONTAINER_NAME) bash -c "composer install --no-plugins --no-interaction"
+
+
+delete:
+	@make stop
+	@make delete-container
+	@make delete-image
+
+delete-container:
+	docker rm $(CONTAINER_NAME)
+
+delete-image:
+	docker rmi $(CONTAINER_NAME)-laravel

@@ -26,35 +26,14 @@ RUN apt-get update -y && apt-get install -y \
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# PHP Extension
+# PHP Extension, Add as needed by your project
 RUN docker-php-ext-install zip gettext intl pdo_mysql gd
 
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
-# # Add a new user "john" with user id 8877
-# RUN useradd -u 8877 fian
-
-# # Set working directory
-# COPY . . 
-
+# Add Permission For Laravel Logs (Can be deleted, as the permission is in makefile)
 RUN chmod -R 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 RUN chmod -R ugo+rw /var/www/html/ || chmod 775 -R /var/www/html/
-
-# RUN chmod -R ugo+rw /var/www/html || chmod -R 775 /var/www/html
-
-# RUN chown -R www-data:www-data /var/www/html
-# RUN chmod -R 777 /var/www/html
-
-# RUN chown -R fian:fian /var/www/html
-# RUN chmod -R 777 /var/www/html
-
-# Change to non-root privilege
-# USER fian
-
-# CMD ["composer","install", "--no-interaction", "--no-plugins"]
-# RUN composer install --no-interaction --no-plugins
-
-# RUN php artisan migrate
