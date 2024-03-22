@@ -11,6 +11,9 @@ setup:
 	@make give-permission
 	@make composer-install
 
+start-db:
+	docker compose --project-name 'mysql_and_phpmyadmin' start 
+
 
 build: 
 	docker compose build
