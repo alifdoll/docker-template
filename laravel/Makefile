@@ -10,6 +10,7 @@ setup:
 	@make up
 	@make give-permission
 	@make composer-install
+	@make create-link
 
 start-db:
 	docker compose --project-name 'mysql_and_phpmyadmin' start 
@@ -34,6 +35,8 @@ give-permission:
 composer-install:
 	docker exec $(CONTAINER_NAME) bash -c "composer install --no-plugins --no-interaction"
 
+create-link:
+	docker exec $(CONTAINER_NAME) bash -c "php artisan storage:link"
 
 delete:
 	@make stop
