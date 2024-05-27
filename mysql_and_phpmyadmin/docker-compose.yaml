@@ -17,7 +17,7 @@ services:
     ports:
       - 8080:80
     environment:
-      UPLOAD_LIMIT: 100000000
+      UPLOAD_LIMIT: 1000000000
       PMA_ARBITRARY: 1
       PMA_HOST: "mysql"
       PMA_USER: "root"
