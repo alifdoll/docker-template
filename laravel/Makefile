@@ -50,4 +50,4 @@ delete-image:
 	docker rmi $(CONTAINER_NAME)-laravel
 
 stop-all:
-	docker stop $(docker ps -q)
+	docker stop $$(docker ps -q)
