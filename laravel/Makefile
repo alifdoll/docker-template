@@ -29,7 +29,7 @@ exec:
 	docker exec  -it$(CONTAINER_NAME) bash
 
 give-permission:
-	docker exec $(CONTAINER_NAME) bash -c "chmod -R ugo+rw /var/www/html/ || chmod 775 -R /var/www/html/"
+	docker exec $(CONTAINER_NAME) bash -c "chmod -R ugo+rw /var/www/html/"
 
 
 composer-install:
