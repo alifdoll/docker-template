@@ -26,7 +26,7 @@ stop:
 	docker-compose stop
 
 exec:
-	docker exec  -it$(CONTAINER_NAME) bash
+	docker exec  -it $(CONTAINER_NAME) bash
 
 give-permission:
 	docker exec $(CONTAINER_NAME) bash -c "chmod -R ugo+rw /var/www/html/"
