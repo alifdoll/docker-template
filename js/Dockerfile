@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:latest
 
 WORKDIR /usr/src/app
 
@@ -8,8 +8,8 @@ COPY . .
 # Comment these if you dont use pnpm on your project
 RUN npm install -g pnpm
 
-# Install app dependencies
-RUN npm install
+# Install app dependencies (USE NPM OR PNPM!!!)
+RUN pnpm install
 
 # Copy the rest of the application files
 COPY . .
@@ -17,6 +17,12 @@ COPY . .
 # Expose the port your application runs on
 EXPOSE 3002
 
+# Adjust based on your projects needs, this is optional!!!
+# Generate Prisma client 
+RUN npx prisma generate
+
 # Start the application
-CMD ["npm", "run", "start"]
+RUN pnpm run build
+
+CMD ["pnpm", "run", "dev"]
 
