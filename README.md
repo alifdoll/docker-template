@@ -8,3 +8,5 @@ So you just need to create the container, and start doing your project
 
 1. Laravel Project
 2. Mysql and Phpmyadmin
+3. PostgreSQL and pgadmin
+4. Nodejs project
