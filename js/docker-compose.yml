@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  service_name: #modify the service name (e.g. express:, nest; )
+    container_name: #enter your container name here
+    build: .
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules # This prevents the host node_modules from overwriting
+    ports:
+      - "3002:3002"
+    networks:
+      - mysql_network # add more network if there are any
+      - postgresql_network
+networks:
+  mysql_network:
+    external: true
+  postgresql_network:
+    external: true
