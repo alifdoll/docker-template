@@ -13,7 +13,8 @@ setup:
 	@make create-link
 
 start-db:
-	docker compose --project-name 'mysql_and_phpmyadmin' start 
+	docker compose --project-name 'postgre_and_pqadmin' start && \
+	docker compose --project-name 'mysql_and_phpmyadmin' stop
 
 
 build: 
@@ -29,7 +30,9 @@ exec:
 	docker exec  -it $(CONTAINER_NAME) bash
 
 give-permission:
-	docker exec $(CONTAINER_NAME) bash -c "chmod -R ugo+rw /var/www/html/"
+	docker exec $(CONTAINER_NAME) bash -c "chmod -R ugo+rw /var/www/html/ || chmod 775 -R /var/www/html/" && \
+	docker exec $(CONTAINER_NAME) bash -c  "chmod -R 775 storage" && \
+	docker exec $(CONTAINER_NAME) bash -c  "chown -R www-data:www-data storage"
 
 
 composer-install:
