@@ -2,6 +2,8 @@ version: "3"
 
 services:
   postgresql:
+    # image: postgres:16
+    build: .
     image: postgres:latest
     container_name: postgresql
     environment:
@@ -13,7 +15,11 @@ services:
       - postgresql_network
 
   pgadmin:
+    build:
+      context: .
+      dockerfile: Dockerfile.pgadmin # Use the custom pgAdmin Dockerfile
     container_name: pgadmin
+    # image: dpage/pgadmin4:7.7
     image: dpage/pgadmin4:latest
     ports:
       - 9090:80

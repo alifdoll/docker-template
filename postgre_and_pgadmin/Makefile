@@ -14,3 +14,6 @@ stop:
 
 exec:
 	docker exec  -it pgadmin sh
+
+update:
+	docker pull dpage/pgadmin4:latest

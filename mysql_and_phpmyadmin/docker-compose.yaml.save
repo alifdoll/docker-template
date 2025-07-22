@@ -1,0 +1,32 @@
+cleversion: "3"
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    networks:
+      - mysql_network
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    # image: phpmyadmin:latest # default phpmyadmin
+    image: beeyev/phpmyadmin-lightweight:latest # include darkmode
+    ports:
+      - 8080:80
+    environment:
+      UPLOAD_LIMIT: 1000000000
+      PMA_ARBITRARY: 1
+      PMA_HOST: "mysql"
+      PMA_USER: "root"
+      PMA_PASSWORD: "root"
+      PMA_NAVIGATIONTREE_ENABLE_GROUPING: "false"
+    networks:
+      - mysql_network
+
+networks:
+  mysql_network:
+    external: false
+    name: mysql_network

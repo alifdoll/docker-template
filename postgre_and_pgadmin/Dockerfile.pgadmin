@@ -1,0 +1,11 @@
+FROM dpage/pgadmin4:latest
+
+USER root
+
+
+# Install required libraries for pg_dump using Alpine package manager
+RUN apk update && \
+    apk add --no-cache zstd-libs lz4-libs
+
+
+USER pgadmin
