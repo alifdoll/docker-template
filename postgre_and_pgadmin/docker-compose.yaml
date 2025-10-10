@@ -4,7 +4,8 @@ services:
   postgresql:
     # image: postgres:16
     build: .
-    image: postgres:latest
+    # image: postgres:latest
+    image: postgis/postgis
     container_name: postgresql
     environment:
       POSTGRES_USER: root

@@ -9,6 +9,8 @@ services:
       - 3306:3306
     networks:
       - mysql_network
+    volumes:
+      - mysql_data:/var/lib/mysql # Add this to persist data
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -30,3 +32,6 @@ networks:
   mysql_network:
     external: false
     name: mysql_network
+
+volumes:
+  mysql_data: # Add this volume definition
