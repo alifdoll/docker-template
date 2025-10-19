@@ -1,4 +1,5 @@
-CONTAINER_NAME=kkp-be
+CONTAINER_NAME=
+SERVICE_NAME= *sesuaikan di docker-compose
 
 setup:
 	@if [ -z "$(CONTAINER_NAME)" ]; then \
@@ -33,19 +34,18 @@ give-permission:
 npm-install:
 	docker exec $(CONTAINER_NAME) bash -c "npm install"
 
-create-link:
-	docker exec $(CONTAINER_NAME) bash -c "php artisan storage:link"
-
 delete:
 	@make stop
 	@make delete-container
 	@make delete-image
+	@make delete-volume
 
 delete-container:
-	docker rm $(CONTAINER_NAME)
+	docker rm -f $(CONTAINER_NAME) || true
 
 delete-image:
-	docker rmi $(CONTAINER_NAME)-laravel
+	docker rmi -f $(CONTAINER_NAME)-$(SERVICE_NAME) || true
 
-stop-all:
-	docker stop $$(docker ps -q)
+delete-volume:
+	docker volume prune -f
+

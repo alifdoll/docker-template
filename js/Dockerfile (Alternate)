@@ -1,0 +1,25 @@
+FROM debian:bookworm-slim
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl bash ca-certificates gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+
+ENV VOLTA_HOME=/root/.volta
+ENV PATH=$VOLTA_HOME/bin:$PATH
+
+RUN curl https://get.volta.sh | bash -s -- --skip-setup
+
+RUN volta install node
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3002
+
+# CMD ["yarn", "dev", "-H", "0.0.0.0", "-p", "3002"]
